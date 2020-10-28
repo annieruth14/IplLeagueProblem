@@ -78,4 +78,12 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(runsCSVList, comparator);
 		return runsCSVList.get(0); 
 	}
+
+	public RunsCSV getPlayerWithMaximumRunsAndBestAverage(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = this.loadData(filePath);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.runs);
+		comparator = comparator.thenComparing(player -> player.average);
+		this.sortDescending(runsCSVList, comparator);
+		return runsCSVList.get(0); 
+	}
 }
