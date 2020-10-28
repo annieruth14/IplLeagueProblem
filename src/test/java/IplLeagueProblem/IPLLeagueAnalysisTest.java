@@ -26,4 +26,10 @@ public class IPLLeagueAnalysisTest {
 		RunsCSV player = analysis.getHighestStrikingRate(MOST_RUNS_FILE_PATH);
 		Assert.assertEquals("Ishant Sharma", player.player_name); 
 	}
+	
+	@Test
+	public void givenData_whenMaximum6sAnd4s_shouldReturnPlayers() throws IPLLeagueException {
+		RunsCSV player = analysis.getPlayerWithMax6(MOST_RUNS_FILE_PATH);
+		Assert.assertEquals("Andre Russell", player.player_name); 
+	}
 }
