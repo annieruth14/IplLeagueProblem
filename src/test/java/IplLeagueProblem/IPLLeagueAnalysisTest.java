@@ -57,4 +57,10 @@ public class IPLLeagueAnalysisTest {
 		WicketsCSV player = analysis.getTopBowlingAverages(MOST_WICKETS_FILE_PATH);
 		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
 	}
+	
+	@Test
+	public void givenWicketsData_whenHighestStrikingRate_shouldReturnPlayer() throws IPLLeagueException {
+		WicketsCSV player = analysis.getHighestStrikingRateOfBowlers(MOST_WICKETS_FILE_PATH);
+		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
+	}
 }
