@@ -23,4 +23,7 @@ public class WicketsCSV {
 	
 	@CsvBindByName(column = "4w")
 	public int wicket4;
+	
+	@CsvBindByName(column = "Wkts")
+	public int wickets;
 }
