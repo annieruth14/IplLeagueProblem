@@ -96,9 +96,18 @@ public class IPLLeagueAnalysis {
 		return wicketsCSVList.get(0);
 	}
 
+	// get bowler with highest striking rate
 	public WicketsCSV getHighestStrikingRateOfBowlers(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
 		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		this.sortDescending(wicketsCSVList, comparator);
+		return wicketsCSVList.get(0);
+	}
+
+	// get bowler with highest striking rate
+	public WicketsCSV getBowlerWithBestEconomy(String filePath) throws IPLLeagueException {
+		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.economyRate);
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
