@@ -95,4 +95,11 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
+
+	public WicketsCSV getHighestStrikingRateOfBowlers(String filePath) throws IPLLeagueException {
+		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		this.sortDescending(wicketsCSVList, comparator);
+		return wicketsCSVList.get(0);
+	}
 }

@@ -11,4 +11,7 @@ public class WicketsCSV {
 	
 	@CsvBindByName(column = "Avg")
 	public double average;
+	
+	@CsvBindByName(column = "SR")
+	public double strikingRate;
 }
