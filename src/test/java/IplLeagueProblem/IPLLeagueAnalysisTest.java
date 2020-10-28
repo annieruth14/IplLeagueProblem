@@ -69,4 +69,10 @@ public class IPLLeagueAnalysisTest {
 		WicketsCSV player = analysis.getBowlerWithBestEconomy(MOST_WICKETS_FILE_PATH);
 		Assert.assertEquals("Ben Cutting", player.player_name);
 	}
+	
+	@Test
+	public void givenWicketsData_whenBestStrikingRateWith5wAnd4w_shouldReturnPlayer() throws IPLLeagueException {
+		WicketsCSV player = analysis.getBowlerWithBestStrikingRateAnd5wAnd4w(MOST_WICKETS_FILE_PATH);
+		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
+	}
 }
