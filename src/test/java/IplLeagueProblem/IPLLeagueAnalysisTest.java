@@ -44,4 +44,10 @@ public class IPLLeagueAnalysisTest {
 		RunsCSV player = analysis.getPlayerWithGreatAverageAndBestStrikingRate(MOST_RUNS_FILE_PATH);
 		Assert.assertEquals("MS Dhoni", player.player_name); 
 	}
+	
+	@Test
+	public void givenData_whenMaximumRunsAndBestAverage_shouldReturnPlayer() throws IPLLeagueException {
+		RunsCSV player = analysis.getPlayerWithMaximumRunsAndBestAverage(MOST_RUNS_FILE_PATH);
+		Assert.assertEquals("David Warner ", player.player_name); 
+	}
 }
