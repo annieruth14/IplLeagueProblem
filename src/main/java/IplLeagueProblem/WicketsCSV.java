@@ -17,4 +17,10 @@ public class WicketsCSV {
 	
 	@CsvBindByName(column = "Econ")
 	public double economyRate;
+	
+	@CsvBindByName(column = "5w")
+	public int wicket5;
+	
+	@CsvBindByName(column = "4w")
+	public int wicket4;
 }

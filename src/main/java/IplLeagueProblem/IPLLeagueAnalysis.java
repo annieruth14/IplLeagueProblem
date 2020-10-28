@@ -111,4 +111,13 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
+	
+	// get bowler with highest striking rate and 5w and 4w
+	public WicketsCSV getBowlerWithBestStrikingRateAnd5wAnd4w(String filePath) throws IPLLeagueException {
+		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		comparator = comparator.thenComparing(player -> player.wicket4 + player.wicket5);
+		this.sortDescending(wicketsCSVList, comparator);
+		return wicketsCSVList.get(0);
+	}
 }
