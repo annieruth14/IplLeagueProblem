@@ -8,11 +8,12 @@ import org.junit.Assert;
 
 public class IPLLeagueAnalysisTest {
 	private static final String MOST_RUNS_FILE_PATH = "./src/test/resources/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
+	private static final String MOST_WICKETS_FILE_PATH = "./src/test/resources/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
 	IPLLeagueAnalysis analysis = new IPLLeagueAnalysis();
 
 	@Test
 	public void start() {
-		analysis.welcomeMessage();
+		analysis.welcomeMessage(); 
 	}
 	
 	@Test
@@ -49,5 +50,11 @@ public class IPLLeagueAnalysisTest {
 	public void givenData_whenMaximumRunsAndBestAverage_shouldReturnPlayer() throws IPLLeagueException {
 		RunsCSV player = analysis.getPlayerWithMaximumRunsAndBestAverage(MOST_RUNS_FILE_PATH);
 		Assert.assertEquals("David Warner ", player.player_name); 
+	}
+	
+	@Test
+	public void givenWicketsData_whenHighestAverage_shouldReturnPlayerHavingHighestAverage() throws IPLLeagueException {
+		WicketsCSV player = analysis.getTopBowlingAverages(MOST_WICKETS_FILE_PATH);
+		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
 	}
 }
