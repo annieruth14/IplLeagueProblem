@@ -12,4 +12,7 @@ public class RunsCSV {
 	
 	@CsvBindByName(column = "Avg")
 	public double average;
+	
+	@CsvBindByName(column = "SR")
+	public double strikingRate;
 }

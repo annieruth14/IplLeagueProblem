@@ -32,10 +32,18 @@ public class IPLLeagueAnalysis {
 		}
 	}
 
-	// get Top Batting average
+	// get player with top batting average
 	public RunsCSV getTopBattingAverages(String filePath) throws IPLLeagueException {
 		List<RunsCSV> runsCSVList = loadData(filePath);
 		Comparator<RunsCSV> averageComparator = Comparator.comparing(census -> census.average);
+		runsCSVList.sort((RunsCSV p1, RunsCSV p2) -> averageComparator.reversed().compare(p1, p2));
+		return runsCSVList.get(0);
+	}
+
+	// get player with highest striking rate
+	public RunsCSV getHighestStrikingRate(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = loadData(filePath);
+		Comparator<RunsCSV> averageComparator = Comparator.comparing(census -> census.strikingRate);
 		runsCSVList.sort((RunsCSV p1, RunsCSV p2) -> averageComparator.reversed().compare(p1, p2));
 		return runsCSVList.get(0);
 	}
