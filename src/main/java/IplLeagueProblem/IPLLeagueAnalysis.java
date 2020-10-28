@@ -120,4 +120,13 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
+	
+	// get bowler with great bowling average and highest striking rate
+	public WicketsCSV getBowlerWithGreatBowlingAverageBestStrikingRate(String filePath) throws IPLLeagueException {
+		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		comparator = comparator.thenComparing(player -> player.average);
+		this.sortDescending(wicketsCSVList, comparator);
+		return wicketsCSVList.get(0);
+	}
 }
