@@ -15,4 +15,10 @@ public class RunsCSV {
 	
 	@CsvBindByName(column = "SR")
 	public double strikingRate;
+	
+	@CsvBindByName(column = "6s")
+	public int sixes;
+	
+	@CsvBindByName(column = "4s")
+	public int fours;
 }

@@ -40,7 +40,7 @@ public class IPLLeagueAnalysis {
 	// get player with top batting average
 	public RunsCSV getTopBattingAverages(String filePath) throws IPLLeagueException {
 		List<RunsCSV> runsCSVList = loadData(filePath);
-		Comparator<RunsCSV> comparator = Comparator.comparing(census -> census.average);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.average);
 		this.sortDescending(runsCSVList, comparator);
 		return runsCSVList.get(0);
 	}
@@ -48,7 +48,15 @@ public class IPLLeagueAnalysis {
 	// get player with highest striking rate
 	public RunsCSV getHighestStrikingRate(String filePath) throws IPLLeagueException {
 		List<RunsCSV> runsCSVList = this.loadData(filePath);
-		Comparator<RunsCSV> comparator = Comparator.comparing(census -> census.strikingRate);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		this.sortDescending(runsCSVList, comparator);
+		return runsCSVList.get(0); 
+	}
+
+	// get player with maximum 6 and 4
+	public RunsCSV getPlayerWithMax6(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = this.loadData(filePath);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.sixes + player.fours);
 		this.sortDescending(runsCSVList, comparator);
 		return runsCSVList.get(0);
 	}
