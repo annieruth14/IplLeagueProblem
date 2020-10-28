@@ -31,7 +31,7 @@ public class IPLLeagueAnalysis {
 			throw new IPLLeagueException(e.getMessage(), IPLLeagueException.ExceptionType.FILE_PROBLEM);
 		}
 	}
-	
+
 	// sort in descending order
 	public <E> void sortDescending(List<E> list, Comparator<E> comparator) {
 		list.sort((E player1, E player2) -> comparator.reversed().compare(player1, player2));
@@ -50,13 +50,22 @@ public class IPLLeagueAnalysis {
 		List<RunsCSV> runsCSVList = this.loadData(filePath);
 		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
 		this.sortDescending(runsCSVList, comparator);
-		return runsCSVList.get(0); 
+		return runsCSVList.get(0);
 	}
 
-	// get player with maximum 6 and 4
-	public RunsCSV getPlayerWithMax6(String filePath) throws IPLLeagueException {
+	// get player with maximum 6s and 4s
+	public RunsCSV getPlayerWithMax6And4(String filePath) throws IPLLeagueException {
 		List<RunsCSV> runsCSVList = this.loadData(filePath);
 		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.sixes + player.fours);
+		this.sortDescending(runsCSVList, comparator);
+		return runsCSVList.get(0);
+	}
+
+	// get player with maximum 6s and 4s and best striking rate
+	public RunsCSV getPlayerWithMax6And4AndStrikingRate(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = this.loadData(filePath);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.sixes + player.fours);
+		comparator = comparator.thenComparing(player -> player.strikingRate);
 		this.sortDescending(runsCSVList, comparator);
 		return runsCSVList.get(0);
 	}
