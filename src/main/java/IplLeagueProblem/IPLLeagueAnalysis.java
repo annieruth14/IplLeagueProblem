@@ -146,11 +146,20 @@ public class IPLLeagueAnalysis {
 	}
 
 	// get cricketer with best average
-	public <E> String getCricketerWithBestAverage(String filePathForRuns, String filePathForWicket) throws IPLLeagueException {
+	public String getCricketerWithBestAverage(String filePathForRuns, String filePathForWicket) throws IPLLeagueException {
 		RunsCSV player1 = getTopBattingAverages(filePathForRuns);
 		WicketsCSV player2 = getTopBowlingAverages(filePathForWicket);
 		if (player1.average > player2.average)
 			return player1.player_name;
 		return player2.player_name;
+	}
+	
+	// get cricketer with most runs and wickets
+	public String getCricketerWithMostRunsAndWickets(String filePath) throws IPLLeagueException {
+		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.runs);
+		comparator = comparator.thenComparing(player -> player.wickets);
+		this.sortDescending(wicketsCSVList, comparator);
+		return wicketsCSVList.get(0).player_name;
 	}
 }
