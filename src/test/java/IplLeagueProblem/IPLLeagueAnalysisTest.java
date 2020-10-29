@@ -61,7 +61,7 @@ public class IPLLeagueAnalysisTest {
 	@Test
 	public void givenWicketsData_whenHighestStrikingRate_shouldReturnPlayer() throws IPLLeagueException {
 		WicketsCSV player = analysis.getHighestStrikingRateOfBowlers(MOST_WICKETS_FILE_PATH);
-		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
+		Assert.assertEquals("Shivam Dube", player.player_name);
 	}
 	
 	@Test
@@ -73,18 +73,24 @@ public class IPLLeagueAnalysisTest {
 	@Test
 	public void givenWicketsData_whenBestStrikingRateWith5wAnd4w_shouldReturnPlayer() throws IPLLeagueException {
 		WicketsCSV player = analysis.getBowlerWithBestStrikingRateAnd5wAnd4w(MOST_WICKETS_FILE_PATH);
-		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
+		Assert.assertEquals("Shivam Dube", player.player_name);
 	}
 	
 	@Test
 	public void givenWicketsData_whenGreatBowlingAverageWithBestStrikingRate_shouldReturnPlayer() throws IPLLeagueException {
 		WicketsCSV player = analysis.getBowlerWithGreatBowlingAverageBestStrikingRate(MOST_WICKETS_FILE_PATH);
-		Assert.assertEquals("Krishnappa Gowtham", player.player_name);
+		Assert.assertEquals("Shivam Dube", player.player_name);
 	}
 	
 	@Test
 	public void givenWicketsData_whenMaximumWicketWithBestBowlingAverage_shouldReturnPlayer() throws IPLLeagueException {
 		WicketsCSV player = analysis.getBowlerWithMaxWicketWithBestBowlingAverage(MOST_WICKETS_FILE_PATH);
 		Assert.assertEquals("Imran Tahir", player.player_name);
+	}
+	
+	@Test
+	public void givenWicketsAndRunsData_whenMaximumAverage_shouldReturnPlayerName() throws IPLLeagueException {
+		String player = analysis.getCricketerWithBestAverage(MOST_RUNS_FILE_PATH, MOST_WICKETS_FILE_PATH);
+		Assert.assertEquals("Krishnappa Gowtham", player);
 	}
 }
