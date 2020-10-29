@@ -93,4 +93,10 @@ public class IPLLeagueAnalysisTest {
 		String player = analysis.getCricketerWithBestAverage(MOST_RUNS_FILE_PATH, MOST_WICKETS_FILE_PATH);
 		Assert.assertEquals("Krishnappa Gowtham", player);
 	}
+	
+	@Test
+	public void givenWicketsData_whenMaximumRunsAndWickets_shouldReturnPlayer() throws IPLLeagueException {
+		String player = analysis.getCricketerWithMostRunsAndWickets(MOST_WICKETS_FILE_PATH);
+		Assert.assertEquals("Deepak Chahar", player);
+	}
 }
