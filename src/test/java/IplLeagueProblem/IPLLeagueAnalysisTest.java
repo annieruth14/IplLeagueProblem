@@ -99,4 +99,10 @@ public class IPLLeagueAnalysisTest {
 		String player = analysis.getCricketerWithMostRunsAndWickets(MOST_WICKETS_FILE_PATH);
 		Assert.assertEquals("Deepak Chahar", player);
 	}
+	
+	@Test
+	public void givenWicketsData_whenMaximumHundredAndBestAverage_shouldReturnPlayer() throws IPLLeagueException {
+		RunsCSV player = analysis.getPlayerWithMaximumHundredsAndBestAverage(MOST_RUNS_FILE_PATH);
+		Assert.assertEquals("David Warner", player.player_name);
+	}
 }
