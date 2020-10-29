@@ -162,4 +162,13 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0).player_name;
 	}
+	
+	// get player with maximum runs and best average
+	public RunsCSV getPlayerWithMaximumHundredsAndBestAverage(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = this.loadData(filePath, RunsCSV.class);
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.hundreds);
+		comparator = comparator.thenComparing(player -> player.average);
+		this.sortDescending(runsCSVList, comparator);
+		return runsCSVList.get(0);
+	}
 }
