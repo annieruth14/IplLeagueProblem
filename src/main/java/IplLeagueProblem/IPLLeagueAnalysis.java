@@ -37,6 +37,11 @@ public class IPLLeagueAnalysis {
 		list.sort((E player1, E player2) -> comparator.reversed().compare(player1, player2));
 	}
 
+	// sort in ascending order
+	private <E> void sort(List<E> list, Comparator<E> comparator) {
+		list.sort((E player1, E player2) -> comparator.compare(player1, player2));
+	}
+
 	// get player with top batting average
 	public RunsCSV getTopBattingAverages(String filePath) throws IPLLeagueException {
 		List<RunsCSV> runsCSVList = loadData(filePath, RunsCSV.class);
@@ -100,7 +105,7 @@ public class IPLLeagueAnalysis {
 	public WicketsCSV getHighestStrikingRateOfBowlers(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
 		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
-		this.sortDescending(wicketsCSVList, comparator);
+		this.sort(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
 
@@ -111,25 +116,26 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
-	
-	// get bowler with highest striking rate and 5w and 4w
+
+	// get bowler with highest striking rate and 5w and 4w ... for bowler striking
+	// rate is lowest
 	public WicketsCSV getBowlerWithBestStrikingRateAnd5wAnd4w(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
 		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
-		comparator = comparator.thenComparing(player -> player.wicket4 + player.wicket5);
-		this.sortDescending(wicketsCSVList, comparator);
+		comparator = comparator.thenComparing(player -> player.wicket5 + player.wicket4);
+		this.sort(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
-	
+
 	// get bowler with great bowling average and highest striking rate
 	public WicketsCSV getBowlerWithGreatBowlingAverageBestStrikingRate(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
-		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
-		comparator = comparator.thenComparing(player -> player.average);
-		this.sortDescending(wicketsCSVList, comparator);
+		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.average);
+		comparator = comparator.thenComparing(player -> player.strikingRate);
+		this.sort(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
-	
+
 	// get bowler with great bowling average and highest striking rate
 	public WicketsCSV getBowlerWithMaxWicketWithBestBowlingAverage(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
@@ -137,5 +143,14 @@ public class IPLLeagueAnalysis {
 		comparator = comparator.thenComparing(player -> player.average);
 		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
+	}
+
+	// get cricketer with best average
+	public <E> String getCricketerWithBestAverage(String filePathForRuns, String filePathForWicket) throws IPLLeagueException {
+		RunsCSV player1 = getTopBattingAverages(filePathForRuns);
+		WicketsCSV player2 = getTopBowlingAverages(filePathForWicket);
+		if (player1.average > player2.average)
+			return player1.player_name;
+		return player2.player_name;
 	}
 }
