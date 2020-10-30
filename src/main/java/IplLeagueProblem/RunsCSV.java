@@ -24,4 +24,7 @@ public class RunsCSV {
 	
 	@CsvBindByName(column = "100")
 	public int hundreds;
+	
+	@CsvBindByName(column = "50")
+	public int fifties;
 }

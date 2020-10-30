@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -122,8 +123,9 @@ public class IPLLeagueAnalysis {
 	public WicketsCSV getBowlerWithBestStrikingRateAnd5wAnd4w(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
 		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.strikingRate);
+		wicketsCSVList.sort(comparator);
 		comparator = comparator.thenComparing(player -> player.wicket5 + player.wicket4);
-		this.sort(wicketsCSVList, comparator);
+		this.sortDescending(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
 	}
 
@@ -131,6 +133,7 @@ public class IPLLeagueAnalysis {
 	public WicketsCSV getBowlerWithGreatBowlingAverageBestStrikingRate(String filePath) throws IPLLeagueException {
 		List<WicketsCSV> wicketsCSVList = this.loadData(filePath, WicketsCSV.class);
 		Comparator<WicketsCSV> comparator = Comparator.comparing(player -> player.average);
+		sortDescending(wicketsCSVList,comparator);
 		comparator = comparator.thenComparing(player -> player.strikingRate);
 		this.sort(wicketsCSVList, comparator);
 		return wicketsCSVList.get(0);
@@ -171,4 +174,17 @@ public class IPLLeagueAnalysis {
 		this.sortDescending(runsCSVList, comparator);
 		return runsCSVList.get(0);
 	}
+	
+	// get player with maximum runs and best average
+	public RunsCSV getPlayerWithZeroHundredsAndFiftiesAndBestAverage(String filePath) throws IPLLeagueException {
+		List<RunsCSV> runsCSVList = this.loadData(filePath, RunsCSV.class);
+		List<RunsCSV> list = new ArrayList<>();
+		runsCSVList.forEach(n-> {
+			if(n.hundreds==0 && n.fifties==0)
+				list.add(n);
+		});
+		Comparator<RunsCSV> comparator = Comparator.comparing(player -> player.average);
+		this.sortDescending(list, comparator);
+		return list.get(0);
+		}
 }
